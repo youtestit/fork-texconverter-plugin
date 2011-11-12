@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:project xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<pomVersion>3</pomVersion>
+	<id>texconverter-plugin</id>
+	<name>TexConverter</name>
+	<groupId>texconverter-plugin</groupId>
+	<currentVersion>1.1.5</currentVersion>
+	<inceptionYear>2006</inceptionYear>
+	<package>org.texconverter</package>
+	<shortDescription></shortDescription>
+	<description>Application for conversion of LaTeX documents into other 
+		formats.</description>
+	<url>http://www.texconverter.org</url>
+	<organization>
+		<name>NEUSTA GmbH</name>
+		<url>http://www.neusta.de</url>
+		<logo/>
+	</organization>
+    <mailingLists>
+        <mailingList>
+            <name> texconverter-developers@lists.sourceforge.net</name>
+            <subscribe>
+                https://lists.sourceforge.net/lists/listinfo/texconverter-developers</subscribe>
+            <unsubscribe/>
+            <post/>
+            <archive>
+                http://sourceforge.net/mailarchive/forum.php?forum=texconverter-developers</archive>
+            <otherArchives/>
+        </mailingList>
+        <mailingList>
+            <name>texconverter-users@lists.sourceforge.net</name>
+            <subscribe>
+                https://lists.sourceforge.net/lists/listinfo/texconverter-users</subscribe>
+            <unsubscribe></unsubscribe>
+            <post>texconverter-users@lists.sourceforge.net</post>
+            <archive>
+                http://sourceforge.net/mailarchive/forum.php?forum=texconverter-users</archive>
+            <otherArchives/>
+        </mailingList>
+    </mailingLists>
+	<developers>
+		<developer>
+			<name>Tim Frana</name>
+			<email>t.frana@neusta.de</email>
+			<organization>NEUSTA GmbH</organization>
+			<organizationUrl>http://www.neusta.de</organizationUrl>
+			<roles><role>developer</role></roles>
+            <timezone>1</timezone>
+		</developer>
+		<developer>
+			<name>Michael Albrecht</name>
+			<email>m.albrecht@neusta.de</email>
+			<organization>NEUSTA GmbH</organization>
+			<organizationUrl>http://www.neusta.de</organizationUrl>
+			<roles><role>project supervisor</role></roles>
+            <timezone>1</timezone>
+		</developer>
+		<developer>
+			<name>Manfred Wolff</name>
+			<email>wolff@manfred-wolff.de</email>
+			<roles><role>project supervisor</role></roles>
+            <organization>Freelancer</organization>
+            <url>http://www.manfred-wolff.de/</url>
+            <timezone>1</timezone>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<name>Stephen Godau</name>
+			<email>s.godau@neusta.de</email>
+			<organization>NEUSTA GmbH</organization>
+			<organizationUrl>http://www.neusta.de</organizationUrl>
+			<roles><role>developer</role></roles>
+            <timezone>1</timezone>
+		</contributor>
+		<contributor>
+			<name>Martin Schäfer</name>
+			<email>m.schaefer@neusta.de</email>
+			<organization>NEUSTA GmbH</organization>
+			<organizationUrl>http://www.neusta.de</organizationUrl>
+			<roles><role>developer</role></roles>
+            <timezone>1</timezone>
+		</contributor>
+	</contributors>
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution/>
+			<comments>Unless required by applicable law or agreed to in 
+				writing, software distributed under the License is distributed 
+				on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY 
+				KIND, either express or implied. See the License for the 
+				specific language governing permissions and limitations under 
+				the License.</comments>
+		</license>
+	</licenses>
+	<repository>
+		<connection/>
+		<developerConnection/>
+		<url/>
+	</repository>
+	<dependencies>
+		<dependency>
+			<groupId>ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>1.6.5</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.13</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-cli</groupId>
+			<artifactId>commons-cli</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!--
+		<dependency>
+			<groupId>ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>1.6.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>velocity</groupId>
+			<artifactId>velocity-dep</artifactId>
+			<version>1.4</version>
+		</dependency>
+-->
+	</dependencies>
+	<build>
+		<sourceDirectory>src/java</sourceDirectory>
+		<unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+        <unitTest>
+            <includes>
+                <include>**/*Test.java</include>
+            </includes>
+            <resources>
+                <resource>
+				    <directory>${basedir}/plugin-resources</directory>
+                    <targetPath>plugin-resources</targetPath>
+                </resource>
+            </resources>
+        </unitTest>
+		<resources>
+			<resource>
+				<directory>${basedir}/plugin-resources</directory>
+				<targetPath>plugin-resources</targetPath>
+			</resource>
+			<resource>
+				<directory>${basedir}</directory>
+				<includes>
+					<include>plugin.jelly</include>
+					<include>plugin.properties</include>
+					<include>project.properties</include>
+					<include>project.xml</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+    <reports>
+        <!--<report>maven-license-plugin</report>-->
+        <report>maven-javadoc-plugin</report>
+        <!--		<report>maven-jxr-plugin</report> -->
+        <report>maven-junit-report-plugin</report>
+        <report>maven-simian-plugin</report>
+        <!-- damit der jcoverage-profiler läuft muss "add variable attributes" im compiler deaktiviert sein!
+			http://www.jpox.org/servlet/forum/viewthread?thread=2704&lastpage=yes
+			http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5036100 -->
+        <report>maven-jcoverage-plugin</report>
+        <report>maven-pmd-plugin</report>
+        <!--<report>maven-checkstyle-plugin</report>-->
+        <!--<report>maven-jdepend-plugin</report>-->
+    </reports>
+</xs:project>

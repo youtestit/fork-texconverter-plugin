@@ -1,0 +1,288 @@
+<project xmlns:ant="jelly:ant" xmlns:j="jelly:core" xmlns:maven="jelly:maven" 
+	xmlns:util="jelly:util">
+
+   <postGoal name="xdoc">
+      <!--the stylesheet maven-base.css was altered too,
+          need to copy this each time to overwrite the standard one -->
+		<copy todir="${maven.docs.dest}/style" overwrite="true">
+			<fileset dir="${maven.docs.src}/style"/>
+		</copy>
+   </postGoal>
+
+	<goal name="dist.app.windows">
+		<j:set var="i.am" value="app.windows"/>
+		<!--<j:set var="hotelportal.log4j.properties"
+            value="log4j.productimport.properties"/>-->
+		<attainGoal name="dist.app"/>
+	</goal>
+	<goal name="dist.app.unix">
+		<j:set var="i.am" value="app.unix"/>
+		<!--<j:set var="hotelportal.log4j.properties"
+            value="log4j.productimport.properties"/>-->
+		<attainGoal name="dist.app"/>
+	</goal>
+	<goal name="dist.test">
+		<j:set var="program_path" value="${program.path}" />
+		<ant:echo>${program.path}</ant:echo>
+	</goal>
+	<goal name="rendertexshort">
+		<attainGoal name="texconverter:renderTex">
+			<j:set var="texconverter.propertiesFile" 
+				value="E:/eclipse32_ws_java15/TexConverter/texdocs/convert.properties"/>
+			<j:set var="texconverter.outputFormatName" value="xdoc"/>
+		</attainGoal>
+	</goal>
+	<preGoal name="plugin:install">
+		<!-- building maven plugin -->
+		<j:set var="i.am" value="mavenplugin"/>
+		<attainGoal name="copyresources"/>
+	</preGoal>
+	
+	<goal name="copyresources">
+		<maven:param-check value="${i.am}" fail="true" 
+			message="The i.am property has not been set!" />
+		<j:set var="varname" value="texconverter.resourcedir.${i.am}" />
+		<j:set var="sourcedir" value="${context.getVariable(varname)}" />
+		<ant:echo message="${sourcedir}"/>
+		<ant:copy todir="plugin-resources">
+			<fileset dir="${texconverter.resourcedir}"/>
+		</ant:copy>
+		<copy todir="${texconverter.resourcedir}" overwrite="true">
+			<fileset dir="${sourcedir}"/>
+		</copy>
+	</goal>
+			<!-- ================================================================== -->
+			<!--  C O M M O N   A P P   S U P P P O R T                             -->
+			<!-- ================================================================== -->
+			<!-- Common support for all stand-alone application builds              -->
+			<!-- ================================================================== -->
+			<goal name="dist.app">
+				<ant:tstamp />
+				<attainGoal name="copyresources" />
+				<maven:param-check value="${i.am}" fail="true" 
+					message="The i.am property has not been set!" />
+				<j:set var="classpath.windows" 
+					value=".;${maven.final.name}.jar" />
+				<j:set var="classpath.unix" value=".:${maven.final.name}.jar" />
+				<!-- target dir, create if not exists, clean if dist of same version exists -->
+				<j:set var="app.dir" 
+					value="${maven.build.dir}/distributions/${i.am}-${pom.currentVersion}_${DSTAMP}_${TSTAMP}" 
+					/>
+				<ant:available file="${maven.build.dir}/distributions" 
+					type="dir" property="dist.dir.exists" value="true" />
+				<j:if test="${dist.dir.exists}">
+					<ant:echo 
+						message="Cleanup before creating a dist.${i.am}" />
+					<ant:delete includeEmptyDirs="true">
+						<fileset dir="${maven.build.dir}/distributions" 
+							includes="${i.am}-${pom.currentVersion}*/**" />
+					</ant:delete>
+				</j:if>
+				<j:if test="${projectDescriptor != null}">
+					<maven:pom var="pom" 
+						projectDescriptor="${projectDescriptor}" />
+				</j:if>
+				<!-- delete old jars to avoid different versions of main jar 
+			in app.dir -->
+				<ant:delete>
+					<fileset dir="${maven.build.dir}" includes="*.jar" />
+				</ant:delete>
+				<!-- build & copy jar -->
+				<attainGoal name="jar:jar" />
+				<ant:echo message="Copying jar to ${app.dir} directory" />
+				<copy todir="${app.dir}">
+					<fileset dir="${maven.build.dir}">
+						<include name="*.jar" />
+					</fileset>
+				</copy>
+				<!-- copy dependencies -->
+				<ant:echo 
+					message="Copying dependencies to ${app.dir} directory" />
+				<j:set var="mavenRepoLocal" 
+					value='${context.getVariable("maven.repo.local")}' />
+				<ant:copy todir="${app.dir}" flatten="true">
+					<!-- grab list of excludedItems up front -->
+					<j:if test="${excludes != ''}">
+						<!-- The excludes are a list of dep ids -->
+						<util:tokenize var="excludeItems" delim=","> 
+							${excludes} </util:tokenize>
+					</j:if>
+					<!-- 
+				for each artifact, see if it is excluded. If not, add a fileset
+				to the copy
+			-->
+					<j:forEach var="lib" items="${pom.artifacts}">
+						<j:set var="excluded" value="false" />
+						<j:if test="${excludes != ''}">
+							<!-- The excludes are a list of dep ids, check if this id is in the list -->
+							<j:forEach var="exclude" items="${excludeItems}">
+								<!-- the exclude could be either the short name (e.g. artifactId), or the id -->
+								<j:if 
+									test="${(lib.dependency.id == exclude) or (lib.dependency.artifactId == exclude)}">
+									<j:set var="excluded" value="true" />
+								</j:if>
+							</j:forEach>
+						</j:if>
+						<j:if test="${!excluded}">
+							<ant:fileset dir="${lib.file.parent}">
+								<ant:include name="${lib.file.name}" />
+							</ant:fileset>
+							<!-- add lib file name to classpath -->
+							<j:set var="classpath.windows" 
+								value="${classpath.windows};${lib.file.name}" />
+							<j:set var="classpath.unix" 
+								value="${classpath.unix}:${lib.file.name}" />
+						</j:if>
+					</j:forEach>
+				</ant:copy>
+				<!-- copy templates (currently only start script) -->
+				<attainGoal name="copy.app.templates" />
+				<fixcrlf srcdir="${app.dir}" eol="lf" includes="**/*.sh" />
+				<fixcrlf srcdir="${app.dir}" eol="lf" 
+					includes="**/*.properties" />
+			</goal>
+			<goal name="copy.app.templates">
+				<attainGoal name="create.start.script" />
+			</goal>
+			<!-- ================================================================== -->
+			<!--  C O M M O N  S C R I P T  S U P P P O R T                         -->
+			<!-- ================================================================== -->
+			<!-- Common support for all builds using a template of the              -->
+			<!-- start_app scripts                                                  -->
+			<!-- ================================================================== -->
+			<goal name="init.start.script">
+				<maven:param-check value="${java.main.class}" fail="true" 
+					message="The java.main.class property has not been set!" />
+				<!-- searching i.am depending path -->
+				<j:set var="varname" value="program.path.${i.am}" />
+				<j:set var="program.path.temp" 
+					value="${context.getVariable(varname)}" />
+				<j:choose>
+					<j:when 
+						test="${context.getVariable('program.path.temp') == null}">
+						<!-- no i.am depending path defined try common program.path -->
+						<j:if 
+							test="${context.getVariable('program.path') == null}">
+							<!-- setting default program path -->
+							<j:set var="program.path" value="." />
+						</j:if>
+					</j:when>
+					<j:otherwise>
+						<!-- setting i.am depending program path -->
+						<j:set var="program.path" value="${program.path.temp}" 
+							/>
+					</j:otherwise>
+				</j:choose>
+				<maven:param-check value="program.path" fail="true" 
+					message="The program.path property has not been set!" />
+				<ant:echo message="program.path: ${program.path}" />
+				<j:choose>
+					<j:when test="${is.local}">
+						<!-- windows.script.name only needed on local builds -->
+						<maven:param-check value="${windows.script.name}" 
+							fail="true" 
+							message="The windows.script.name property has not been set!" 
+							/>
+					</j:when>
+					<j:otherwise>
+						<maven:param-check value="${unix.script.name}" 
+							fail="true" 
+							message="The unix.script.name property has not been set!" 
+							/>
+					</j:otherwise>
+				</j:choose>
+				<j:set var="varname" value="java.home.${i.am}" />
+				<j:set var="java.home.dir" 
+					value="${context.getVariable(varname)}" />
+				<!-- Check required properties -->
+				<maven:param-check value="java.home.dir" fail="true" 
+					message="The java.home.${i.am} property has not been set!" 
+					/>
+				<ant:echo message="java.home.dir: ${java.home.dir}" />
+			</goal>
+			<!-- ================================================================== -->
+			<!-- S T A R T  S C R I P T  G E N E R A T I O N                        -->
+			<!-- ================================================================== -->
+			<!-- Delegates start script generation to create.unix.start.script or   -->
+			<!-- to create.windows.start.script if i.am equals 'local'              -->
+			<!-- ================================================================== -->
+			<goal name="create.start.script" prereqs="init.start.script">
+				<j:choose>
+					<j:set var="i_am" value="${i.am}" />
+					<j:when test="${i_am.equals('app.windows')}">
+						<attainGoal name="create.windows.start.script" />
+					</j:when>
+					<j:otherwise>
+						<attainGoal name="create.unix.start.script" />
+					</j:otherwise>
+				</j:choose>
+			</goal>
+			<!-- ================================================================== -->
+			<!-- W I N D O W S  A P P  S C R I P T                                  -->
+			<!-- ================================================================== -->
+			<goal name="create.windows.start.script">
+				<j:set var="program_path" value="${program.path}" />
+				<j:if test="${program_path.equals('.') == 'false'}">
+					<!-- convert non-default program path to windows path -->
+					<path id="program.path.id">
+						<pathelement location="${program.path}" />
+					</path>
+					<pathconvert targetos="windows" 
+						property="program.path.windows" refid="program.path.id" 
+						/>
+					<j:set var="program.path" value="${program.path.windows}" />
+				</j:if>
+				<maven:param-check value="${windows.script.name}" fail="true" 
+					message="The windows.script.name property has not been set!" 
+					/>
+				<ant:echo 
+					message="Copying windows start script to ${app.dir} directory" 
+					/>
+				<copy tofile="${app.dir}/${windows.script.name}">
+					<filterset>
+						<filter token="creator" value="Maven" />
+						<filter token="i.am" value="${i.am}" />
+						<filter token="java.home.dir" value="${java.home.dir}" 
+							/>
+						<filter token="java.main.class" 
+							value="${java.main.class}" />
+						<filter token="java.vm.args" value="${java.vm.args}" />
+						<filter token="program.path" value="${program.path}" />
+						<filter token="classpath.windows" 
+							value="${classpath.windows}" />
+					</filterset>
+					<fileset dir="${build.templates.dir}">
+						<include name="start_app.bat" />
+					</fileset>
+				</copy>
+			</goal>
+			<!-- ================================================================== -->
+			<!-- U N I X  A P P  S C R I P T                                        -->
+			<!-- ================================================================== -->
+			<goal name="create.unix.start.script">
+				<maven:param-check value="${unix.script.name}" fail="true" 
+					message="The unix.script.name property has not been set!" />
+				<ant:echo 
+					message="Copying unix start script to ${app.dir} directory" 
+					/>
+				<copy tofile="${app.dir}/${unix.script.name}">
+					<filterset>
+						<filter token="creator" value="Maven" />
+						<filter token="i.am" value="${i.am}" />
+						<filter token="java.home.dir" value="${java.home.dir}" 
+							/>
+						<filter token="java.main.class" 
+							value="${java.main.class}" />
+						<filter token="java.vm.args" value="${java.vm.args}" />
+						<filter token="program.path" value="${program.path}" />
+						<filter token="classpath.unix" 
+							value="${classpath.unix}" />
+						<filter token="unix.script.name" 
+							value="${unix.script.name}" />
+					</filterset>
+					<fileset dir="${build.templates.dir}">
+						<include name="start_app.sh" />
+					</fileset>
+				</copy>
+			</goal>
+			</project>
