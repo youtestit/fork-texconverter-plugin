@@ -1,0 +1,12 @@
+#set ($alignment = $object.alignment.toString())
+#if ($alignment == "CENTER")
+<div align="center">
+  ~<object.children>~
+</div>
+#elseif ($alignment == "RIGHT")
+<div align="right">
+  ~<object.children>~
+</div>
+#else
+~<object.children>~
+#end

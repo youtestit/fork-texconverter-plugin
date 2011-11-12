@@ -1,0 +1,1 @@
+<img src="$object.path" #if (!$object.isHeightRelative() && $object.height)height="$object.height"#end #if (!$object.isWidthRelative() && $object.width)width="$object.width"#end />

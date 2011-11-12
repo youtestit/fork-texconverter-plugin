@@ -1,0 +1,3 @@
+
+#set ($level = 3 - $toplevel)#foreach ($lvl in [1..$level])+#end ~<object.title>~
+``<dl>``~<object.children>~``</dl>``

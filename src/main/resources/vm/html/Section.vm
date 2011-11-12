@@ -1,0 +1,9 @@
+#if ($object.label && $object.label.length() > 0)<a name="$object.label"></a>#end
+#set ($level = $object.level.ordinal() + 1 )
+#set ($level = $level - $toplevel)
+<div class="section-level-$level">
+<h$level>~<object.title>~</h$level>
+~<object.children>~
+</div>
+
+

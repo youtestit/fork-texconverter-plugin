@@ -1,0 +1,6 @@
+#if ($object.style.toString() == "DESCRIPTIONS")
+<dt><b>~<object.description>~</b></dt> 
+<dd>~<object.children>~</dd>
+#else
+<li>~<object.children>~</li>
+#end

@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<!DOCTYPE cmdDefs [
+    <!ELEMENT cmd EMPTY>
+    <!ATTLIST cmd argparsers CDATA #REQUIRED handler CDATA #REQUIRED hasAltMode (false|true) #REQUIRED mandargs CDATA #REQUIRED name CDATA #REQUIRED optargs CDATA #REQUIRED plainval (false|true) #REQUIRED >
+    <!ELEMENT cmdDefs (globalcmddefs,environments)>
+    <!ELEMENT env (cmd*)>
+    <!ATTLIST env argparsers CDATA #REQUIRED builder CDATA #REQUIRED hasAltMode (false|true) #REQUIRED mandargs CDATA #REQUIRED name ID #REQUIRED optargs CDATA #REQUIRED >
+    <!ELEMENT environments (env+)>
+    <!ELEMENT globalcmddefs (cmd+)>
+    ]>
+<cmdDefs>
+    <globalcmddefs>
+        <cmd name="_" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.EscapedCharHandler" argparsers="" />
+        <cmd name="%" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.EscapedCharHandler" argparsers="" />
+        <cmd name="#" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.EscapedCharHandler" argparsers="" />
+        <cmd name="$" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.EscapedCharHandler" argparsers="" />
+        <cmd name="{" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.EscapedCharHandler" argparsers="" />
+        <cmd name="}" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.EscapedCharHandler" argparsers="" />
+        <cmd name="\" mandargs="0" optargs="1" plainval="false" hasAltMode="true" handler="org.texconverter.reader.tex.handlers.impl.FormattingHandler" argparsers="" />
+        <cmd name="&amp;" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.EscapedCharHandler" argparsers="" />
+        <cmd name="&quot;" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.AccentHandler" argparsers="" />
+        <cmd name="appendix" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.FormattingHandler" argparsers="" />
+        <cmd name="author" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.DocumentHandler" argparsers="" />
+        <cmd name="begin" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.EnvironmentHandler" argparsers="n"/>
+        <cmd name="bf" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="bfseries" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="bibliography" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.BibliographyHandler" argparsers=""/>
+        <cmd name="bibliographystyle" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.BibliographyHandler" argparsers="" />
+        <cmd name="caption" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.FormattingHandler" argparsers="" />
+        <cmd name="centering" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.AlignmentHandler" argparsers="" />
+        <cmd name="centerline" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.AlignmentHandler" argparsers="" />
+        <cmd name="chapter" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.SectionHandler" argparsers="" />
+        <cmd name="cite" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.BibliographyHandler" argparsers="yy"/>
+        <cmd name="date" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.DocumentHandler" argparsers="n"/>
+        <cmd name="documentclass" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.DocumentHandler" argparsers="n"/>
+        <cmd name="em" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="emph" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="end" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.EnvironmentHandler" argparsers="n"/>
+        <cmd name="fbox" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.FormattingHandler" argparsers=""/>
+        <cmd name="footnotesize" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="glossary" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.GlossaryHandler" argparsers=""/>
+        <cmd name="graphicspath" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.Picturehandler" argparsers="" />
+        <cmd name="hline" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="huge" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="Huge" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="href" mandargs="2" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.UrlHandler" argparsers="nn" />
+        <cmd name="include" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.InputHandler" argparsers=""/>
+        <cmd name="includegraphics" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.Picturehandler" argparsers="n"/>
+        <cmd name="index" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.IndexHandler" argparsers="" />
+        <cmd name="input" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.InputHandler" argparsers=""/>
+        <cmd name="it" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="item" mandargs="0" optargs="1" plainval="false" hasAltMode="false" handler="null" argparsers="y" />
+        <cmd name="itshape" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="label" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.ReferenceHandler" argparsers=""/>
+        <cmd name="large" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="Large" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="LARGE" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="lstinputlisting" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.LstListingHandler" argparsers=""/>
+        <cmd name="lstset" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.LstListingHandler" argparsers="" />
+        <cmd name="mdseries" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="newcommand" mandargs="2" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.DefineCmdHandler" argparsers="nnn"/>
+        <cmd name="newline" mandargs="0" optargs="1" plainval="false" hasAltMode="true" handler="org.texconverter.reader.tex.handlers.impl.FormattingHandler" argparsers="" />
+        <cmd name="nocite" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.BibliographyHandler" argparsers=""/>
+        <cmd name="nomenclature" mandargs="2" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.GlossaryHandler" argparsers=""/>
+        <cmd name="normalsize" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="pageref" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.ReferenceHandler" argparsers="n"/>
+        <cmd name="par" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.FormattingHandler" argparsers="" />
+        <cmd name="paragraph" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.SectionHandler" argparsers="" />
+        <cmd name="parbox" mandargs="2" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.FormattingHandler" argparsers=""/>
+        <cmd name="part" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.SectionHandler" argparsers="" />
+        <cmd name="pdfinfo" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.DocumentHandler" argparsers="n"/>
+        <cmd name="printglossary" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.GlossaryHandler" argparsers=""/>
+        <cmd name="printindex" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.IndexHandler" argparsers="" />
+        <cmd name="printnomenclature" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.GlossaryHandler" argparsers=""/>
+        <cmd name="raggedleft" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.AlignmentHandler" argparsers="" />
+        <cmd name="raggedright" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.AlignmentHandler" argparsers="" />
+        <cmd name="ref" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.ReferenceHandler" argparsers=""/>
+        <cmd name="renewcommand" mandargs="2" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.DefineCmdHandler" argparsers="nnn" />
+        <cmd name="rm" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="rmfamily" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="scriptsize" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="sc" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="scshape" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="section" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.SectionHandler" argparsers="" />
+        <cmd name="sf" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="sffamily" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="sl" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="slshape" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="small" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="subparagraph" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.SectionHandler" argparsers="" />
+        <cmd name="subsection" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.SectionHandler" argparsers="" />
+        <cmd name="subsubsection" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.SectionHandler" argparsers="" />
+        <cmd name="textbf" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="textit" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="textmd" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="textrm" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="textsc" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="textsf" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="textsl" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="texttt" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="textup" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="tiny" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="title" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.DocumentHandler" argparsers="" />
+        <cmd name="tt" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="ttfamily" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="upshape" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
+        <cmd name="url" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.UrlHandler" argparsers="n" />
+        <cmd name="verb" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.VerbatimHandler" argparsers="" />
+        <!--######################-->
+        <!--# Accent stuff       #-->
+        <!--######################-->
+        <cmd name="`" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="'" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="^" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="~" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="=" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="." mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="u" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="v" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="H" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="t" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="c" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="d" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="b" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <!--######################-->
+        <!--# UNHANDLED COMMANDS #-->
+        <!--######################-->
+        <cmd name="-" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="addcontentsline" mandargs="3" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers=""/>
+        <cmd name="addtocontents" mandargs="2" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers=""/>
+        <cmd name="backslash" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="bigskip" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers=""/>
+        <cmd name="color" mandargs="3" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="n" />
+        <cmd name="DeclareGraphicsExtensions" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="definecolor" mandargs="3" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="nnn" />
+        <cmd name="fancyfoot" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="fancyhead" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="fancyhf" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="footnote" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="hypersetup" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="n" />
+        <cmd name="leftmark" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="markboth" mandargs="2" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="newpage" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="parindent" mandargs="0" optargs="0" plainval="true" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="setcounter" mandargs="2" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="setlength" mandargs="2" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="tableofcontents" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="rightmark" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="vfill" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers=""/>
+        <cmd name="vspace" mandargs="1" optargs="0" plainval="false" hasAltMode="true" handler="null" argparsers="" />
+        <!--#################################################-->
+        <!--# IGNORED COMMANDS (more or less intentionally) #-->
+        <!--#################################################-->
+        <cmd name="frenchspacing" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="headheight" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="makeglossary" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers=""/>
+        <cmd name="makeindex" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="makenomenclature" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers=""/>
+        <cmd name="newblock" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="overfullrule" mandargs="0" optargs="0" plainval="true" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="pagestyle" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="parsep" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="pdfcompresslevel" mandargs="0" optargs="0" plainval="true" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="thepage" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="thispagestyle" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+        <cmd name="usepackage" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="null" argparsers="" />
+    </globalcmddefs>
+    <environments>
+        <env name="abstract" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="appendix" mandargs="0" optargs="0" hasAltMode="false" builder="org.texconverter.reader.tex.builder.impl.AppendixBuilder" argparsers=""/>
+        <env name="array" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="center" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="description" mandargs="0" optargs="0" hasAltMode="false" builder="org.texconverter.reader.tex.builder.impl.ListingBuilder" argparsers="">
+            <cmd name="item" mandargs="0" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.ListingItemHandler" argparsers="y" />
+        </env>
+        <env name="displaymath" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="document" mandargs="0" optargs="0" hasAltMode="false" builder="org.texconverter.reader.tex.builder.impl.DocumentBuilder" argparsers=""/>
+        <env name="enumerate" mandargs="0" optargs="0" hasAltMode="false" builder="org.texconverter.reader.tex.builder.impl.ListingBuilder" argparsers="">
+            <cmd name="item" mandargs="0" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.ListingItemHandler" argparsers="y" />
+        </env>
+        <env name="eqnarray" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="equation" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="figure" mandargs="0" optargs="1" hasAltMode="true" builder="org.texconverter.reader.tex.builder.impl.FloatingEnvBuilder" argparsers=""/>
+        <env name="flushleft" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="flushright" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="fussypar" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="itemize" mandargs="0" optargs="0" hasAltMode="false" builder="org.texconverter.reader.tex.builder.impl.ListingBuilder" argparsers="">
+            <cmd name="item" mandargs="0" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.ListingItemHandler" argparsers="y" />
+        </env>
+        <env name="letter" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="list" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="lstlisting" mandargs="0" optargs="1" hasAltMode="false" builder="org.texconverter.reader.tex.builder.impl.LstListingBuilder" argparsers=""/>
+        <env name="math" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="minipage" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="picture" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="quotation" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="quote" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="samepage" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="sloppypar" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="tabbing" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="table" mandargs="0" optargs="1" hasAltMode="true" builder="org.texconverter.reader.tex.builder.impl.FloatingEnvBuilder" argparsers=""/>
+        <env name="tabular" mandargs="1" optargs="1" hasAltMode="false" builder="org.texconverter.reader.tex.builder.impl.TableBuilder" argparsers="n">
+            <cmd name="hline" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TableHandler" argparsers=""/>
+            <cmd name="\" mandargs="0" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TableHandler" argparsers=""/>
+        </env>
+        <env name="thebibliography" mandargs="1" optargs="0" hasAltMode="false" builder="org.texconverter.reader.tex.builder.impl.BibliographyBuilder" argparsers="">
+            <cmd name="bibitem" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.BibliographyHandler" argparsers="yy" />
+        </env>
+        <env name="theindex" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="titlepage" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="trivlist" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+        <env name="verbatim" mandargs="0" optargs="0" hasAltMode="false" builder="org.texconverter.reader.tex.builder.impl.VerbatimBuilder" argparsers=""/>
+        <env name="verse" mandargs="0" optargs="0" hasAltMode="false" builder="null" argparsers=""/>
+    </environments>
+</cmdDefs>

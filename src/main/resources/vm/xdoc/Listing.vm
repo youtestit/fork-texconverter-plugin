@@ -1,0 +1,16 @@
+#set ($style = $object.style.toString())
+#if ($style == "BULLETS")
+<ul>
+~<object.children>~
+</ul>
+#end
+#if ($style == "NUMBERS")
+<ol>
+~<object.children>~
+</ol>
+#end
+#if ($style == "DESCRIPTIONS")
+<dl>
+~<object.children>~
+</dl>
+#end

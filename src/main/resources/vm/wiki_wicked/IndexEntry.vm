@@ -1,0 +1,1 @@
+``<dt>``//~<object.term>~//``</dt><dd>``~<object.referencesText>~#if ($object.children)``<dl>``~<object.children>~``</dl>``#else~<object.children>~#end``</dd>``

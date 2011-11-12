@@ -1,0 +1,1 @@
+#if ($object.isEmphasised())**$object.content**#else$object.content#end

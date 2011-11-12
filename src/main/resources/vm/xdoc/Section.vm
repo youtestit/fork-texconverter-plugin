@@ -1,0 +1,23 @@
+#set ($level = $object.level.ordinal() + 1 )
+#set ($level = $level - $toplevel)
+#if ($level == 1)
+	<section name="~<object.title>~">
+	<p>~<object.children>~</p>
+	</section>
+#elseif ($level == 2)
+	<subsection name="~<object.title>~">
+	<p>~<object.children>~</p>
+	</subsection>
+#elseif ($level == 3)
+	<h4>~<object.title>~</h4>
+	<p>~<object.children>~</p>
+#elseif ($level == 4)
+	<h5>~<object.title>~</h5>
+	<p>~<object.children>~</p>
+#elseif ($level == 5)
+	<h6>~<object.title>~</h6>
+	<p>~<object.children>~</p>
+#else
+	<p><b>~<object.title>~</b></p>
+	<p>~<object.children>~</p>
+#end

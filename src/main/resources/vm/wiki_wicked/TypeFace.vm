@@ -1,0 +1,4 @@
+#if ($object.fontFamily)#if ($object.fontFamily.toString() == "NONPROPORTIONAL")#set ($useTt = 1)#end
+#elseif ($object.fontSeries)#if ($object.fontSeries.toString() == "BOLD")#set ($useBold = 1)#end
+#elseif ($object.fontShape)#if ($object.fontShape.toString() == "ITALIC" || $object.fontShape.toString() == "SLANTED")#set ($useItalic = 1)#end#end
+#if ($useTt){{#end#if ($useBold)**#end#if ($useItalic)//#end~<object.children>~#if ($useItalic)//#end#if ($useBold)**#end#if ($useTt)}}#end

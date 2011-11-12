@@ -1,0 +1,1 @@
+#if ($listnestinglvl > 0)#foreach ($lvl in [1..$listnestinglvl]) #end#end#if ($object.style.toString() == "DESCRIPTIONS"): ~<object.description>~ : #elseif ($object.style.toString() == "BULLETS")* #else# #end~<object.children>~

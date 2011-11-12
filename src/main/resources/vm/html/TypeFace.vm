@@ -1,0 +1,36 @@
+#if ($object.fontSize)														## TypeFace.TYPE_SIZE
+	#set ($size = $object.fontSize.ordinal())
+	#if ($size <= 1) #set ($size = "xx-small")
+	#elseif ($size == 2) #set ($size = "x-small")
+	#elseif ($size == 3) #set ($size = "small")
+	#elseif ($size == 4) #set ($size = "medium")
+	#elseif ($size == 5) #set ($size = "large")
+	#elseif ($size == 6) #set ($size = "x-large")
+	#else #set ($size = "xx-large")
+	#end
+#elseif ($object.fontFamily)												## TypeFace.TYPE_FAMILY:
+	#if ($object.fontFamily.toString() == "ROMAN")							## TypeFace.FFAM_ROMAN
+		#set ($face = "'Times New Roman',Times,serif")
+	#elseif ($object.fontFamily.toString() == "SANSSERIF")					## TypeFace.FFAM_SANSSERIF
+		#set ($face="Verdana,Arial,sans-serif")
+	#elseif ($object.fontFamily.toString() == "NONPROPORTIONAL")			## TypeFace.FFAM_NONPROPORTIONAL
+		#set ($useTt = 1)
+	#end
+#elseif ($object.fontSeries)												## TypeFace.TYPE_SERIES:
+	#if ($object.fontSeries.toString() == "BOLD")								## TypeFace.FSER_BOLD
+		#set ($useBold = 1)
+	#end
+#elseif ($object.fontShape)													## TypeFace.TYPE_SHAPE:
+	#if ($object.fontShape.toString() == "ITALIC" || $object.fontShape.toString() == "SLANTED")							## TypeFace.FSHAP_ITALIC
+		#set ($useItalic = 1)
+	#end
+#end
+#if ($size || $face) <span style="#if ($size)font-size:$size;#end#if ($face)font-family:$face;#end" > #end
+#if ($useTt) <tt> #end
+#if ($useBold) <b> #end
+#if ($useItalic) <i> #end
+~<object.children>~
+#if ($useItalic) </i> #end
+#if ($useBold) </b> #end
+#if ($useTt) </tt> #end
+#if ($size || $face) </span> #end

@@ -1,0 +1,6 @@
+
+#set ($level = $object.level.ordinal() + 1 )
+#set ($level = $level - $toplevel)
+#foreach ($lvl in [1..$level])+#end ~<object.title>~#if ($object.label)``<span id="~<object.label>~"/>``#end
+
+~<object.children>~

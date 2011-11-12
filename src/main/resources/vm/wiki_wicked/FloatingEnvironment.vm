@@ -1,0 +1,2 @@
+
+#if($object.label)``<span id="~<object.label>~"/>``#end~<object.children>~

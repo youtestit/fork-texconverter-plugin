@@ -1,0 +1,5 @@
+#set ($level = 3 - $toplevel)
+<h$level>~<object.title>~</h$level>
+<dl>
+	~<object.children>~
+</dl>

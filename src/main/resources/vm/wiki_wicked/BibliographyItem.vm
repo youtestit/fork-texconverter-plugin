@@ -1,0 +1,1 @@
+: [~<object.referenceKey>~] : ~<object.children> #if ($object.label)``<span id="~<object.label>~"/>``#end
