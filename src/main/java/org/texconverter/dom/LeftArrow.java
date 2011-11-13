@@ -1,6 +1,6 @@
 /**
  * $Revision: 1.1 $
- * $Date: 2006/08/30 09:35:20 $
+ * $Date: 2006/08/30 09:35:21 $
  *
  * ====================================================================
  * TexConverter
@@ -20,47 +20,11 @@
  *
  * created: 02.08.2006 tfrana
  */
-package org.texconverter.dom.impl;
-
-import org.texconverter.dom.Footnote;
-
+package org.texconverter.dom;
 
 /**
- * @author pguillerm
+ * @author tfrana
  */
-public class FootNoteImpl extends AbstractNode implements Footnote {
-
-    private static int uid = 0;
-    
-    private String description = null;
-
-    private int id = 0;
-    
-
-
-    public FootNoteImpl() {
-        super();
-        synchronized (FootNoteImpl.class) {
-            this.id = uid++;
-        }
-    }
-
-    @Override
-    public String getContent() {
-        return description;
-    }
-
-    @Override
-    public void setContent(String content) {
-       this.description = content;
-        
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    
-    
+public interface LeftArrow extends Node, TextContent {
 }
+

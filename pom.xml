@@ -31,6 +31,7 @@
 		<ant.version>1.6.5</ant.version>
 		<slf4j.version>1.6.3</slf4j.version>
 		<junit.version>4.10</junit.version>
+		<main.class.full.name>org.texconverter.TexConverterCommandline</main.class.full.name>
 	</properties>
 
 
@@ -283,7 +284,7 @@
 				</executions>
 				<configuration>
 					<executable>java</executable>
-					<mainClass>org.texconverter.TexConverterCommandline</mainClass>
+					<mainClass>${main.class.full.name}</mainClass>
 
 					<arguments>
 						<argument>-i

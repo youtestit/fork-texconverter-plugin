@@ -1,6 +1,6 @@
 /**
  * $Revision: 1.1 $
- * $Date: 2006/08/30 09:35:20 $
+ * $Date: 2006/08/30 09:35:30 $
  *
  * ====================================================================
  * TexConverter
@@ -20,47 +20,25 @@
  *
  * created: 02.08.2006 tfrana
  */
-package org.texconverter.dom.impl;
+package org.texconverter.reader.tex.handlers.impl;
 
-import org.texconverter.dom.Footnote;
-
+import org.texconverter.dom.impl.Command;
+import org.texconverter.dom.impl.LeftArrowImpl;
+import org.texconverter.reader.tex.builder.impl.AbstractBuilder;
+import org.texconverter.reader.tex.handlers.CommandHandler;
 
 /**
  * @author pguillerm
  */
-public class FootNoteImpl extends AbstractNode implements Footnote {
+public class LeftArrowhandler implements CommandHandler {
 
-    private static int uid = 0;
-    
-    private String description = null;
-
-    private int id = 0;
-    
-
-
-    public FootNoteImpl() {
-        super();
-        synchronized (FootNoteImpl.class) {
-            this.id = uid++;
+    /**
+     * {@inheritDoc}
+     */
+    public void handle(final Command cmd, final AbstractBuilder builder) {
+        if ("leftArrow".equals(cmd.getName())) {
+            builder.consumeNode(new LeftArrowImpl(), false);
         }
     }
 
-    @Override
-    public String getContent() {
-        return description;
-    }
-
-    @Override
-    public void setContent(String content) {
-       this.description = content;
-        
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    
-    
 }

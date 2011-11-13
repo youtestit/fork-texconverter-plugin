@@ -22,45 +22,29 @@
  */
 package org.texconverter.dom.impl;
 
-import org.texconverter.dom.Footnote;
+import org.texconverter.dom.LeftArrow;
 
 
 /**
  * @author pguillerm
  */
-public class FootNoteImpl extends AbstractNode implements Footnote {
+public class LeftArrowImpl extends AbstractNode implements LeftArrow {
 
-    private static int uid = 0;
-    
-    private String description = null;
-
-    private int id = 0;
-    
+    private String content = null;
 
 
-    public FootNoteImpl() {
+    public LeftArrowImpl() {
         super();
-        synchronized (FootNoteImpl.class) {
-            this.id = uid++;
-        }
     }
 
     @Override
     public String getContent() {
-        return description;
+        return content;
     }
 
     @Override
     public void setContent(String content) {
-       this.description = content;
-        
+       this.content = content;
     }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    
     
 }

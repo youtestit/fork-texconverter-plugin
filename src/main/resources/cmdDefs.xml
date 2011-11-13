@@ -109,6 +109,10 @@
         
         <cmd name="footnote" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.FootNotehandler" argparsers="n"/>
         
+        <cmd name="LaTeX" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.LaTeXhandler" argparsers=""/>
+        <cmd name="leftArrow" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.LeftArrowhandler" argparsers=""/>
+        <cmd name="rightArrow" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.RightArrowhandler" argparsers=""/>
+        
         <!--######################-->
         <!--# Accent stuff       #-->
         <!--######################-->

@@ -1,1 +1,1 @@
-<div class="$object.path.replace('{', '').replace('}', '')"></div>
+<div class="includeIMG $object.path.replace('{', '').replace('}', '')"></div>
