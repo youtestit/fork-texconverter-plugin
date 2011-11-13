@@ -22,6 +22,9 @@
  */
 package org.texconverter;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -30,6 +33,9 @@ import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.texconverter.resource.ClasspathResourceLoader;
 import org.texconverter.resource.ResourceLoader;
 
@@ -38,6 +44,8 @@ import org.texconverter.resource.ResourceLoader;
  */
 public class TexConverterCommandline extends TexConverter {
 
+    private final static Logger LOGGER = LoggerFactory.getLogger(TexConverterCommandline.class);
+    
     private static final String OPTION_PROPFILE = "p";
 
     private static final String OPTION_INPUT_FILE = "i";
@@ -159,6 +167,17 @@ public class TexConverterCommandline extends TexConverter {
         converter.init(null, verbose);
         converter.startConversion(propertiesFile, inputFile, outputFile,
                 outputFormat, localeCode);
+        
+        File outFile = new File(outputFile);
+        
+        try {
+            FileUtils.copyDirectory(new File(TexConverter.RESOURCES_PATH+"syntaxHighlighter"),
+                                    new File(outFile.getParentFile()+"/syntaxHighlighter"));
+        } catch (IOException e) {
+            LOGGER.error("can't copy syntaxHighlighter",e);
+            System.exit(1);
+        }
+        
     }
 
     @Override

@@ -18,6 +18,38 @@
 	      })();
 	
 	    </script> 
+	
+	
+		<link type="text/css" rel="stylesheet" href="syntaxHighlighter/styles/shCoreDefault.css"/>    
+	    
+	    <script type="text/javascript" src="syntaxHighlighter/scripts/shCore.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushAppleScript.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushAS3.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushBash.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushColdFusion.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushCpp.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushCSharp.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushCss.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushDelphi.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushDiff.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushErlang.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushGroovy.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushJava.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushJavaFX.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushJScript.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushPerl.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushPhp.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushPlain.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushPowerShell.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushPython.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushRuby.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushSass.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushScala.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushSql.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushVb.js"></script>
+		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushXml.js"></script>
+	    
+	    <script type="text/javascript">SyntaxHighlighter.all();</script>
 	</head>
 	
 	

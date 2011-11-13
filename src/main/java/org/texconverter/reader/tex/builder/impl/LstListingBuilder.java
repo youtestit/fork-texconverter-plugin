@@ -22,7 +22,9 @@
  */
 package org.texconverter.reader.tex.builder.impl;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +65,6 @@ public final class LstListingBuilder extends EmptyBuilder {
         final Matcher m = RERIGHTWHITESPACE.matcher(VerbatimParser
                 .parseEnvironmentVerbatim(getTokenizer(), "lstlisting"));
         lstListing.setContent(m.replaceAll(""));
-
         return (FloatingEnvironmentImpl) root;
     }
 

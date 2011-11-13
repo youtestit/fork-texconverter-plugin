@@ -49,8 +49,32 @@ public class UrlHandler implements CommandHandler {
         }
 
         if (url != null) {
+            if (url.getUrl() != null) {
+                url.setUrl(removeBackslash(url.getUrl()));
+
+            }
+            if (url.getContent() != null) {
+                url.setContent(removeBackslash(url.getContent()));
+            }
+        }
+
+        if (url != null) {
             builder.consumeNode(url, false);
         }
     }
 
+    protected String removeBackslash(String url) {
+        String result = "";
+        if (url != null && url.contains("\\")) {
+            for (char index : url.toCharArray()) {
+                if (index != '\\') {
+                    result += index;
+                }
+            }
+        } else {
+            return url;
+        }
+
+        return result;
+    }
 }

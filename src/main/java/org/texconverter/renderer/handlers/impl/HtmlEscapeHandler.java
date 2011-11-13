@@ -45,48 +45,28 @@ public class HtmlEscapeHandler extends BasicEscapeHandler {
     @Override
     public Node escapeNode(final Node node) {
 
-        if (node instanceof LstListing || node instanceof Verbatim) {
-            ((TextContent) node)
-                    .setContent(escapeVerbatimText(((TextContent) node)
-                            .getContent()));
-        } else if (node instanceof TextContent) {
-            ((TextContent) node).setContent(escapeString(((TextContent) node)
-                    .getContent()));
+        if (node instanceof TextContent) {
+            final TextContent currentNode =(TextContent) node;
+            currentNode.setContent(escapeString(currentNode.getContent()));
         }
 
         if (node instanceof Reference) {
-            ((Reference) node).setReferencedLabel(escapeUrl(((Reference) node)
-                    .getReferencedLabel()));
+            final Reference currentNode =(Reference) node;
+            currentNode.setReferencedLabel(escapeUrl(currentNode.getReferencedLabel()));
         }
-        if (node instanceof IndexMarkReference
-                && ((IndexMarkReference) node).getType().equals(
-                        IndexMarkReference.IndexRefType.RANGE)) {
-            ((IndexMarkReference) node)
-                    .setReferencedLabelStop(escapeUrl(((IndexMarkReference) node)
-                            .getReferencedLabelStop()));
+        
+        if (node instanceof IndexMarkReference 
+            && ((IndexMarkReference) node).getType().equals(IndexMarkReference.IndexRefType.RANGE)) {
+            
+            final IndexMarkReference currentNode =(IndexMarkReference) node;
+            currentNode.setReferencedLabelStop(escapeUrl(currentNode.getReferencedLabelStop()));
         }
 
         return node;
     }
 
     private String escapeVerbatimText(final String verbatimText) {
-        final StringBuffer result = new StringBuffer();
-        if (verbatimText != null) {
-            char tmpChar;
-            for (int i = 0; i < verbatimText.length(); i++) {
-                tmpChar = verbatimText.charAt(i);
-                if (tmpChar == ' ') {
-                    result.append("&nbsp;");
-                } else if (tmpChar == '\n') {
-                    result.append("<br/>");
-                } else if (tmpChar == '\t') {
-                    result.append("&nbsp;&nbsp;&nbsp;&nbsp;");
-                } else {
-                    result.append(escapeString("" + tmpChar));
-                }
-            }
-        }
-        return result.toString();
+        return verbatimText;
     }
 
     /**
@@ -94,6 +74,10 @@ public class HtmlEscapeHandler extends BasicEscapeHandler {
      */
     @Override
     public String escapeString(final String string) {
+        if(string!=null && (string.contains("<script")||string.contains("script>"))){
+            return string;
+        }
+        
         return StringEscapeUtils.escapeHtml(string);
     }
 }
