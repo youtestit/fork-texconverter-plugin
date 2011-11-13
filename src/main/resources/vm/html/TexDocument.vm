@@ -4,24 +4,9 @@
 		<meta name="keywords" content="YouTestIt, you test it,open source, ui coverage, test, acceptance testing,software quality, selenium, bromine,continuous integration,smile,smile.fr">
 
        	<link href="default.css" rel="stylesheet" type="text/css">
-       	
-       	<script type="text/javascript"> 
-	
-	      var _gaq = _gaq || [];
-	      _gaq.push(['_setAccount', 'UA-26629041-1']);
-	      _gaq.push(['_trackPageview']);
-	
-	      (function() {
-	        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	      })();
-	
-	    </script> 
-	
-	
 		<link type="text/css" rel="stylesheet" href="syntaxHighlighter/styles/shCoreDefault.css"/>    
 	    
+	    <script type="text/javascript" src="script.js"></script>
 	    <script type="text/javascript" src="syntaxHighlighter/scripts/shCore.js"></script>
 		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushAppleScript.js"></script>
 		<script type="text/javascript" src="syntaxHighlighter/scripts/shBrushAS3.js"></script>
@@ -55,7 +40,49 @@
 	
 	
 	<body>
-~<object.children>~
+		<div id="info">
+				<div id="projectInfo">
+					<div id="logo">You Test it !</div>
+					<div id="projectDocTitle">
+						<div></div>
+					</div>
+					<div id="projectLink">
+						<ul>
+							<li><a href="http://www.youtestit.org" title="Home page">www.youtestit.org</a></li>
+							<li> 
+								<a href="https://github.com/youtestit" target="blank"> 
+									Main project
+								</a> 
+							</li> 
+							
+							<li> 
+								<a href="https://github.com/youtestit/youtestit-documentation" target="blank"> 
+									Documentation project
+								</a> 
+							</li> 
+							
+							<li> 
+								<a href="https://github.com/youtestit/youtestit" target="blank"> 
+									YouTestit sources codes project
+								</a> 
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+				<div id="sponsors">
+				
+				</div>
+		</div>
+	
+		<div id="menu">
+		
+		</div>
+	
+	
+		<div id="doc">
+			~<object.children>~
+		</div>
 	</body>
 	
 	

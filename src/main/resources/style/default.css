@@ -1,0 +1,127 @@
+/*******************************************************************************
+* GENERICS
+*******************************************************************************/
+h1 , h1>a {
+    color:#00536C;
+}
+
+
+h2  , h2>a{
+    border-bottom: 2px solid;
+    color: #55707c;
+}
+
+h3, h3>a{
+    color: #55707c;
+}
+
+a{
+    color: #55707c;
+    text-decoration: none;
+}
+a:HOVER{
+    text-decoration: underline;
+}
+
+
+/*******************************************************************************
+* PROJECT
+*******************************************************************************/
+#info{
+    margin-bottom: 70px;
+}
+
+#logo{
+    background: url(images/logo.png) no-repeat;
+    color: transparent;
+    height: 61px;
+    width: 210px;
+    margin: auto;
+}
+
+#projectInfo{
+    text-align: center;
+}
+
+#projectLink li{
+ list-style: none outside none;
+}
+
+
+/*******************************************************************************
+* SECTIONS
+*******************************************************************************/
+.section-level-1{
+   margin-top: 25px;
+}
+
+.section_level_1_title,
+.section_level_1_cornerLeft,
+.section_level_1_cornerCenter,
+.section_level_1_cornerRight{
+    height: 98px;
+}
+
+.section_level_1_title{
+    background: url(images/img05center.gif);
+}
+
+.section_level_1_cornerLeft{
+    background: url(images/img05left.gif) no-repeat;
+    float: left;
+    width: 7px;
+}
+
+.section_level_1_cornerCenter{
+    float: left;
+}
+
+.section_level_1_cornerRight{
+    background: url(images/img05right) no-repeat;
+    float: right;
+    width: 7px;
+}
+
+
+.section_content{
+    padding : 16px;
+}
+
+
+.section_content li{
+    margin-bottom : 12px;
+}
+
+/*******************************************************************************
+* LIST
+*******************************************************************************/
+.positif, .negatif{
+    float: left;
+    height: 17px;
+    width: 17px;
+    margin-right: 12px;
+}
+.positif {
+    background: url("images/positif.png") no-repeat;
+}
+
+.negatif {
+    background: url("images/negatif.png") no-repeat;
+}
+
+
+/*******************************************************************************
+* CODE
+*******************************************************************************/
+.code{
+    margin: 8px;
+}
+
+/*******************************************************************************
+* FOOTNOTE
+*******************************************************************************/
+.footnote{
+    color : #D10000;
+    font-weight: bold;
+    cursor: pointer;
+}

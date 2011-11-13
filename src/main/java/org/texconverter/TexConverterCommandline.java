@@ -171,6 +171,19 @@ public class TexConverterCommandline extends TexConverter {
         File outFile = new File(outputFile);
         
         try {
+            LOGGER.info("Copy theme ...");
+            FileUtils.copyDirectory(new File(TexConverter.RESOURCES_PATH+"style/images"),
+                                    new File(outFile.getParentFile()+"/images"));
+            
+            
+            FileUtils.copyFile(new File(TexConverter.RESOURCES_PATH+"style/default.css"), 
+                              new File(outFile.getParentFile()+"/default.css"));
+            
+            FileUtils.copyFile(new File(TexConverter.RESOURCES_PATH+"style/script.js"), 
+                    new File(outFile.getParentFile()+"/script.js"));
+                    
+            
+            LOGGER.info("Copy syntax Highlighter ...");
             FileUtils.copyDirectory(new File(TexConverter.RESOURCES_PATH+"syntaxHighlighter"),
                                     new File(outFile.getParentFile()+"/syntaxHighlighter"));
         } catch (IOException e) {

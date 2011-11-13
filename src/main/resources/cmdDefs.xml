@@ -106,6 +106,9 @@
         <cmd name="upshape" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.TypeFaceHandler" argparsers="" />
         <cmd name="url" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.UrlHandler" argparsers="n" />
         <cmd name="verb" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.VerbatimHandler" argparsers="" />
+        
+        <cmd name="footnote" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="org.texconverter.reader.tex.handlers.impl.FootNotehandler" argparsers="n"/>
+        
         <!--######################-->
         <!--# Accent stuff       #-->
         <!--######################-->
@@ -136,7 +139,6 @@
         <cmd name="fancyfoot" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="null" argparsers="" />
         <cmd name="fancyhead" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="null" argparsers="" />
         <cmd name="fancyhf" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
-        <cmd name="footnote" mandargs="1" optargs="1" plainval="false" hasAltMode="false" handler="null" argparsers="" />
         <cmd name="hypersetup" mandargs="1" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="n" />
         <cmd name="leftmark" mandargs="0" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
         <cmd name="markboth" mandargs="2" optargs="0" plainval="false" hasAltMode="false" handler="null" argparsers="" />
