@@ -184,16 +184,18 @@
 			<version>${commons-io.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<version>${velocity.version}</version>
-		</dependency>
+
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>${slf4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>${velocity.version}</version>
 		</dependency>
 
 		<dependency>
@@ -213,13 +215,31 @@
 	<build>
 		<resources>
 			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
+				<directory>src/main/resources/localization</directory>
+				<filtering>false</filtering>
 			</resource>
+
+			<resource>
+				<directory>src/main/resources/</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>cmdDefs.xml</include>
+					<include>velocity.properties</include>
+				</includes>
+				<targetPath>${project.build.directory}/resources/</targetPath>
+			</resource>
+
+			<resource>
+				<directory>src/main/resources/vm</directory>
+				<filtering>false</filtering>
+				<targetPath>vm</targetPath>
+			</resource>
+
 		</resources>
 
 
 		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -228,6 +248,27 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -242,33 +283,49 @@
 				</executions>
 				<configuration>
 					<executable>java</executable>
+					<mainClass>org.texconverter.TexConverterCommandline</mainClass>
+
 					<arguments>
-						<argument>-classpath</argument>
-						<classpath />
-						<argument>org.texconverter.TexConverterCommandline</argument>
+						<argument>-i
+							/home/pguillerm/git/youtestit-documentation/development/fr/youtestit-development-fr.tex</argument>
+						<argument>-o
+							/home/pguillerm/git/youtestit-documentation/development/fr/web/youtestit-development-fr.html</argument>
+						<argument>-f html</argument>
+						<argument>-m true</argument>
 					</arguments>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>${main.class.full.name}</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.5</version>
+			</plugin>
 		</plugins>
-
-
-
-
 	</build>
 
+
+
+
 	<reports>
-        <!--<report>maven-license-plugin</report>-->
 		<report>maven-javadoc-plugin</report>
-        <!--		<report>maven-jxr-plugin</report> -->
 		<report>maven-junit-report-plugin</report>
 		<report>maven-simian-plugin</report>
-        <!-- damit der jcoverage-profiler läuft muss "add variable attributes" im compiler deaktiviert sein!
-			http://www.jpox.org/servlet/forum/viewthread?thread=2704&lastpage=yes
-			http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5036100 -->
 		<report>maven-jcoverage-plugin</report>
 		<report>maven-pmd-plugin</report>
-        <!--<report>maven-checkstyle-plugin</report>-->
-        <!--<report>maven-jdepend-plugin</report>-->
 	</reports>
 
 

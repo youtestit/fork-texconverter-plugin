@@ -45,7 +45,7 @@ public final class ResourceManager {
     /**
      * TODO me too.
      */
-    public static final String RES_STRINGS = "resources/localization/localization";
+    public static final String RES_STRINGS = "localization";
 
     private final static Logger LOGGER = LoggerFactory.getLogger(ResourceManager.class);
 

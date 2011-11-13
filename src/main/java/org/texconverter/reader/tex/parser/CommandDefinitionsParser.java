@@ -22,6 +22,8 @@
  */
 package org.texconverter.reader.tex.parser;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -79,13 +81,14 @@ public final class CommandDefinitionsParser {
 
         InputStream istream = null;
         try {
-            istream = ResourceManager.getInstance().getResource(filepath);
-            if (istream == null) {
+            final File inputFile = new File(filepath);
+            if(!inputFile.exists()){
                 final String msg = "The command definitions file " + filepath
                         + " was not found";
                 LOGGER.error(msg);
                 throw new ConfigurationException(msg);
             }
+            istream = new FileInputStream(inputFile);
 
             docbuilder = dbfactory.newDocumentBuilder();
             doc = docbuilder.parse(istream);

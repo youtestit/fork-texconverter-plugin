@@ -87,6 +87,7 @@ public final class BasicParser {
                 builder.appendText(tokenizer.getLastTokenSequence());
             }
 
+            LOGGER.info(""+builder.getSectionNumberingDepth());
             if (builder.isFinished()) {
                 break;
             }

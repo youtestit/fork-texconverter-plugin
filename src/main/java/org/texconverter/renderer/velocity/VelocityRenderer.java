@@ -22,6 +22,8 @@
  */
 package org.texconverter.renderer.velocity;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -37,6 +39,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.texconverter.TexConverter;
 import org.texconverter.TexConverter.OUTPUTFORMATS;
 import org.texconverter.dom.Node;
 import org.texconverter.dom.Section;
@@ -61,7 +64,7 @@ public class VelocityRenderer implements Renderer {
 
     protected static final String VELTEMPL_ATTRSTOP_TAG = ">~";
 
-    protected static final String TEMPLATE_BASEDIR = "resources/vm/";
+    protected static final String TEMPLATE_BASEDIR = "vm/";
 
     protected String templateDir;
 
@@ -87,15 +90,13 @@ public class VelocityRenderer implements Renderer {
         String resDir = resourceDir;
         final Properties props = new Properties();
 
-        final InputStream istream = ResourceManager.getInstance().getResource(
-                resDir + "resources/velocity.properties");
-        if (istream == null) {
-            final String msg = "Velocity properties not found";
-            LOGGER.error(msg);
-            throw new ConfigurationException(msg);
+        File file = new File(resourceDir+"velocity.properties");
+        if(!file.exists()){
+            throw  new ConfigurationException("Can't find the velocity.properties");
         }
 
         try {
+            final InputStream istream =  new FileInputStream(file);
             props.load(istream);
             istream.close();
         } catch (final IOException e) {
@@ -425,17 +426,12 @@ public class VelocityRenderer implements Renderer {
      * @return the template prefix or null
      */
     protected String searchForTemplate(final Node aNode) {
-        String templateName = null;
+        String templateName = "";
 
         final Class[] classes = aNode.getClass().getInterfaces();
         for (int i = 0; i < classes.length; i++) {
 
-            // String templateName = classes[i].getSimpleName();
-            // File tmpFile = new File(templateDirectory + "/" + templateName
-            // + ".vm");
-            // if (tmpFile.exists()) { return templateName; }
-
-            templateName = classes[i].getSimpleName();
+            templateName = new String(classes[i].getSimpleName());
             LOGGER.debug("seaching for template " + templateDir + templateName
                     + ".vm");
 

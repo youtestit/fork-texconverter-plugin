@@ -353,4 +353,19 @@ public class Tokenizer {
         // current reader = new input
         reader = input;
     }
+
+    public PeekReader getReader() {
+        return reader;
+    }
+
+    public void setReader(PeekReader reader) {
+        this.reader = reader;
+    }
+
+    public StringBuffer getSb() {
+        return sb;
+    }
+    
+    
+    
 }

@@ -49,6 +49,8 @@ public class TexConverterCommandline extends TexConverter {
     private static final String OPTION_VERBOSE = "v";
 
     private static final String OPTION_LOCALECODE = "l";
+    
+    private static final String OPTION_MAVEN_DEV= "m";
 
     /**
      * @param args
@@ -79,12 +81,19 @@ public class TexConverterCommandline extends TexConverter {
                                 + " system locale will be used. Refer to the documentation for available language codes.")
                 .create(OPTION_LOCALECODE);
 
+        final Option optionMavenDev = OptionBuilder.withArgName("maven")
+                                                   .hasOptionalArg()
+                                                   .withDescription("Allow to specify that running on devlopment maven mode")
+                                                   .create(OPTION_MAVEN_DEV);
+        
         final Options directOptions = new Options();
         directOptions.addOption(optionInputFile);
         directOptions.addOption(optionOutputFile);
         directOptions.addOption(optionOutputFormat);
         directOptions.addOption(optionVerbose);
         directOptions.addOption(optionLocaleCode);
+        directOptions.addOption(optionMavenDev);
+        
 
         final Option optionPropertiesFile = OptionBuilder.withArgName("file")
                 .hasArg().isRequired().withDescription(
@@ -98,6 +107,7 @@ public class TexConverterCommandline extends TexConverter {
         CommandLine commandLine = null;
 
         String inputFile = null, outputFile = null, outputFormat = null, propertiesFile = null, localeCode = null;
+        String mavenDevMode = null; 
         try {
             commandLine = cmdparser.parse(propertyOptions, args);
 
@@ -112,6 +122,18 @@ public class TexConverterCommandline extends TexConverter {
                 outputFile = commandLine.getOptionValue(OPTION_OUTPUT_FILE);
                 outputFormat = commandLine.getOptionValue(OPTION_OUTPUTFORMAT);
                 localeCode = commandLine.getOptionValue(OPTION_LOCALECODE);
+                
+                mavenDevMode = commandLine.getOptionValue(OPTION_MAVEN_DEV);
+                if(mavenDevMode!=null){
+                    TexConverter.RESOURCES_PATH= "src/main/resources/";
+                }
+                
+                if(inputFile!=null){
+                    inputFile = inputFile.trim();
+                }
+                if(outputFile!=null){
+                    outputFile = outputFile.trim();
+                }
 
             } catch (final ParseException e) {
 

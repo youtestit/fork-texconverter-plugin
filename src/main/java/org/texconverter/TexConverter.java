@@ -64,6 +64,21 @@ public abstract class TexConverter {
     private final static Logger LOGGER = LoggerFactory.getLogger(TexConverter.class);
 
     private static final String SUBFOLDER_IMAGES = "images";
+    
+    public static final String PROP_PROJECTS = "texconverter.projects";
+
+    public static final String PROP_INPUT_FILE = "inputFileName";
+
+    public static final String PROP_OUTPUT_FILE = "outputFileName";
+
+    public static final String PROP_OUTPUT_FORMAT = "outputFormatName";
+
+    public static final String PROP_LOCALECODE = "localeCode";
+
+    public static final String COMMANDDEFS_FILE = "cmdDefs.xml";
+    
+    public static String RESOURCES_PATH = "resources/";
+    
 
     /**
      * @author tfrana
@@ -108,19 +123,8 @@ public abstract class TexConverter {
         }
     }
 
-    protected static final String PROP_PROJECTS = "texconverter.projects";
 
-    protected static final String PROP_INPUT_FILE = "inputFileName";
 
-    protected static final String PROP_OUTPUT_FILE = "outputFileName";
-
-    protected static final String PROP_OUTPUT_FORMAT = "outputFormatName";
-
-    protected static final String PROP_LOCALECODE = "localeCode";
-
-    protected static final String COMMANDDEFS_FILE = "resources/cmdDefs.xml";
-
-    protected static final String LOG4JPROPERTIES = "resources/log4j.properties";
 
     private String resourceDir = "";
 
@@ -138,7 +142,7 @@ public abstract class TexConverter {
 
         if (!isInitialized) {
             if (basDir == null) {
-                basDir = "";
+                basDir = RESOURCES_PATH;
             } else if (basDir.length() > 0) {
                 basDir = convertSlashes(basDir);
                 if (!basDir.endsWith("/")) {
@@ -265,17 +269,23 @@ public abstract class TexConverter {
     }
 
     private boolean startSingleConversion(final String inputFilePath,
-            final String outputFilePath, final String outputFormatName,
+            final String outputFilePath, final String outputFormatType,
             final Locale locale) {
         boolean success = false;
-
+        String outputFormatName= outputFormatType;
+        if(outputFormatName==null){
+            outputFormatName = "html";
+        }else{
+            outputFormatName = outputFormatName.trim();
+        }
+        
+        
+        
         if (inputFilePath == null) {
             LOGGER.error("no inputFileName specified");
         } else if (outputFilePath == null) {
             LOGGER.error("no outputFileName specified");
-        } else if (outputFormatName == null) {
-            LOGGER.error("no outputFormat specified");
-        } else {
+        }else {
 
             if (LOGGER.isInfoEnabled()) {
                 LOGGER.info("Starting conversion: Input file " + inputFilePath

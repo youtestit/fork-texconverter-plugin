@@ -70,6 +70,7 @@ public class BuilderFactory {
     public TeXDocumentBuilder getTeXDocumentBuilder(
             final String cmdDefsFilePath, final Locale locale)
             throws IOException, ConfigurationException {
+        
         final TeXDocumentBuilderImpl builder = new TeXDocumentBuilderImpl(
                 cmdDefsFilePath, locale);
         return builder;

@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+import org.texconverter.TexConverter;
 import org.texconverter.dom.Node;
 import org.texconverter.dom.Reference;
 import org.texconverter.dom.TexDocument;
@@ -51,21 +52,26 @@ public class TeXDocumentBuilderImpl extends AbstractBuilder implements
         TeXDocumentBuilder {
 
     /**
-     * @param cmdDefsFilePath
-     *            path of the command/environment definitions xml file
-     * @param locale
-     *            The locale which should be used for localized resources
-     * @throws IOException
-     *             on IO problems
-     * @throws ConfigurationException
-     *             on configuration problems
+     * @param cmdDefsFilePath path of the command/environment definitions xml
+     *            file
+     * @param locale The locale which should be used for localized resources
+     * @throws IOException on IO problems
+     * @throws ConfigurationException on configuration problems
      */
-    public TeXDocumentBuilderImpl(final String cmdDefsFilePath,
-            final Locale locale) throws IOException, ConfigurationException {
+    public TeXDocumentBuilderImpl(final String cmdDefsFile, final Locale locale)
+            throws IOException, ConfigurationException {
         super();
         rootBuilder = this;
-        CommandDefinitionsParser
-                .readTexConverterDefsFile(cmdDefsFilePath, this);
+
+        String cmdDefsFilePath = null;
+
+        if (TexConverter.COMMANDDEFS_FILE.equals(cmdDefsFile)) {
+            cmdDefsFilePath = TexConverter.RESOURCES_PATH + cmdDefsFile;
+        }else{
+            cmdDefsFilePath = cmdDefsFile ;
+        }
+
+        CommandDefinitionsParser.readTexConverterDefsFile(cmdDefsFilePath, this);
         labels = new HashMap<String, Node>();
         refNodes = new ArrayList<Reference>();
         super.init(null, new TexDocumentImpl(), Token.NONE);
@@ -78,6 +84,9 @@ public class TeXDocumentBuilderImpl extends AbstractBuilder implements
     public TexDocument build(final File texFile) throws IOException,
             TexParserException, ConfigurationException {
 
+        if(!texFile.exists()){
+            throw new IOException("File not found :"+texFile.getAbsolutePath());
+        }
         tokenizer = new Tokenizer();
         tokenizer.insertInput(new FilePeekReader(texFile));
 
